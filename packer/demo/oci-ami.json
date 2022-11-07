@@ -1,0 +1,30 @@
+{
+    "builders": [{
+        "type": "oracle-oci",
+        "region": "mx-queretaro-1",
+        "availability_domain": "DglB:MX-QUERETARO-1-AD-1",
+        "tenancy_ocid": "ocid1.tenancy.oc1..aaaaaaaa7ty4szjv7ozq4sfptbdulmtzl2cbxqmenbl6msmhsa7uwrih2j4a",
+        "base_image_ocid": "ocid1.image.oc1.mx-queretaro-1.aaaaaaaajbdsmu2ljwy6ace6kf5edzydpjrkvp6xbfgeoyk4zqrrsvuhf7hq",
+        "compartment_ocid": "ocid1.tenancy.oc1..aaaaaaaa7ty4szjv7ozq4sfptbdulmtzl2cbxqmenbl6msmhsa7uwrih2j4a",
+        "image_name": "oci-packerpractice",
+        "shape": "VM.Standard2.1",
+        "ssh_username": "ubuntu",
+        "subnet_ocid": "ocid1.subnet.oc1.mx-queretaro-1.aaaaaaaayzajuwgn6momb5m6c522rybpc3tol64x2ixjcrrdmqihkwp65t5q",
+        "user_ocid": "ocid1.user.oc1..aaaaaaaa4m63sfwqzekvtxedodicm4znqm3pvscj3tsfe5nyrpnwj4v5iuga",
+        "fingerprint": "41:a6:68:38:0e:46:d6:29:5a:c0:41:f5:73:ad:bd:1b",
+        "key_file": "/home/acig/abraxas/packer/demo/keys/josetoledanomorales-11-03-17-27.pem"
+    }],
+    "provisioners": [{
+        "type": "shell",
+        "inline": [
+            "sudo apt-get clean",
+            "sudo apt-get update",
+            "sudo apt-get install -y apt-transport-https ca-certificates nfs-common",
+            "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
+            "sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\"",
+            "sudo apt-get update",
+            "sudo apt-get install -y docker-ce",
+            "sudo usermod -aG docker ubuntu"
+        ]
+    }]
+}
